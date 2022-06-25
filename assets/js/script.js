@@ -290,4 +290,3 @@ setInterval(function() {
     auditTask($(this));
   });
 }, 1800000);
-;
