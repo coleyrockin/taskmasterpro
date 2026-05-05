@@ -4,109 +4,122 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Taskmaster Pro is a local-first Kanban task board with due dates, drag-and-drop workflow stages, and browser storage persistence.">
+  <meta name="theme-color" content="#212529">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; connect-src 'self'; upgrade-insecure-requests">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Staatliches&display=swap" rel="stylesheet">
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
-  <link rel="stylesheet" href="./assets/css/style.css" />
-  <title>Taskmaster Pro</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Taskmaster Pro | Local Kanban Task Board</title>
 </head>
 
 <body>
+  <a class="sr-only sr-only-focusable skip-link" href="#task-board">Skip to task board</a>
 
-  <div class="row min-vh-100 no-gutters">
-    <header class="col-12 col-lg-3 bg-dark text-light sticky-top d-flex flex-column p-4 p-lg-3">
-        <h1 class="text-center">
-          <span class="oi oi-task d-inline d-lg-none"></span>
-          Taskmaster Pro Edition
-        </h1>
-          <button id="create-task" class="btn btn-block btn-add" data-toggle="modal" data-target="#task-form-modal"><span class="oi oi-plus mr-2"></span>Add Task</button>
-          <button id="remove-tasks" class="btn btn-block btn-delete mb-2 mb-md-4"><span class="oi oi-trash mr-2"> </span>Delete All Tasks</button>
-     
-      <span class="oi oi-task display-1 text-center mb-2 d-none d-lg-block mt-auto"></span>
+  <div class="row min-vh-100 no-gutters app-shell">
+    <header class="col-12 col-lg-3 bg-dark text-light sticky-top d-flex flex-column p-4 p-lg-3 app-sidebar">
+      <h1 class="text-center">
+        <span class="oi oi-task d-inline d-lg-none" aria-hidden="true"></span>
+        Taskmaster Pro
+      </h1>
+      <p class="text-center text-lg-left app-tagline">
+        A local-first Kanban board for keeping tasks moving from idea to done.
+      </p>
+      <button id="create-task" class="btn btn-block btn-add" type="button" data-toggle="modal" data-target="#task-form-modal">
+        <span class="oi oi-plus mr-2" aria-hidden="true"></span>Add Task
+      </button>
+      <button id="remove-tasks" class="btn btn-block btn-delete mb-2 mb-md-4" type="button">
+        <span class="oi oi-trash mr-2" aria-hidden="true"></span>Delete All Tasks
+      </button>
+
+      <span class="oi oi-task display-1 text-center mb-2 d-none d-lg-block mt-auto" aria-hidden="true"></span>
       <p class="d-none d-lg-block">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta unde quasi voluptate reiciendis sequi? Maxime aliquam expedita ullam aperiam nihil. Alias cumque omnis error dolorum! Animi suscipit inventore qui cum?
+        Add tasks, update due dates, drag cards between stages, and drop finished clutter into the trash.
       </p>
     </header>
-    <main class="col-12 col-lg-9 d-flex flex-column ">
-      <div class="m-5 row justify-content-around">
-          <!--  -->
-          <div class="col-12 col-md-6 col-xl-3 mb-3">
-            <div class="card">
-              <h4 class="card-header bg-dark text-light d-flex align-items-center">
-                To Do
-              </h4>
-              <ul id="list-toDo" class="list-group list-group-flush">
-              </ul>
-            </div>
-          </div>
-          <!--  -->
-          <div class="col-12 col-md-6 col-xl-3 mb-3">
-            <div class="card">
-              <h4 class="card-header bg-dark text-light d-flex align-items-center">
-                In Progress
-              </h4>
-              <ul id="list-inProgress" class="list-group list-group-flush">
-              </ul>
-            </div>
-          </div>
-          <!--  -->
-          <div class="col-12 col-md-6 col-xl-3 mb-3">
-            <div class="card">
-              <h4 class="card-header bg-dark text-light d-flex align-items-center">
-                In Review
-              </h4>
-              <ul id="list-inReview" class="list-group list-group-flush">
-              </ul>
-            </div>
-          </div>
-          <!--  -->
-          <div class="col-12 col-md-6 col-xl-3 mb-3">
-            <div class="card">
-              <h4 class="card-header bg-dark text-light d-flex align-items-center">
-                Done
-              </h4>
-              <ul id="list-done" class="list-group list-group-flush">
-              </ul>
-            </div>
-          </div>
-      </div>
-      <div class="mt-auto overflow-hidden" id="trash">
-        <div class="w-100 p-3 text-center bottom-trash">
-          <span class="oi oi-trash"> </span> Drop Here to Remove.
+
+    <main id="task-board" class="col-12 col-lg-9 d-flex flex-column" tabindex="-1">
+      <section class="m-4 m-md-5 row justify-content-around" aria-label="Task workflow columns">
+        <div class="col-12 col-md-6 col-xl-3 mb-3">
+          <article class="card h-100">
+            <h2 class="card-header bg-dark text-light d-flex align-items-center h4" id="heading-toDo">
+              To Do
+            </h2>
+            <ul id="list-toDo" class="list-group list-group-flush task-list" aria-labelledby="heading-toDo"></ul>
+          </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3 mb-3">
+          <article class="card h-100">
+            <h2 class="card-header bg-dark text-light d-flex align-items-center h4" id="heading-inProgress">
+              In Progress
+            </h2>
+            <ul id="list-inProgress" class="list-group list-group-flush task-list" aria-labelledby="heading-inProgress"></ul>
+          </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3 mb-3">
+          <article class="card h-100">
+            <h2 class="card-header bg-dark text-light d-flex align-items-center h4" id="heading-inReview">
+              In Review
+            </h2>
+            <ul id="list-inReview" class="list-group list-group-flush task-list" aria-labelledby="heading-inReview"></ul>
+          </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3 mb-3">
+          <article class="card h-100">
+            <h2 class="card-header bg-dark text-light d-flex align-items-center h4" id="heading-done">
+              Done
+            </h2>
+            <ul id="list-done" class="list-group list-group-flush task-list" aria-labelledby="heading-done"></ul>
+          </article>
+        </div>
+      </section>
+
+      <div class="mt-auto overflow-hidden" id="trash" aria-label="Drop a task here to remove it">
+        <div class="w-100 p-3 text-center bottom-trash" aria-hidden="true">
+          <span class="oi oi-trash" aria-hidden="true"></span> Drop Here to Remove
         </div>
       </div>
     </main>
   </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="task-form-modal" tabindex="-1" role="dialog" aria-labelledby="task-form-modal" aria-hidden="true">
+  <div class="modal fade" id="task-form-modal" tabindex="-1" role="dialog" aria-labelledby="task-form-title" aria-describedby="task-form-help" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="myModalTitle">Add New Task</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <h2 class="modal-title h5" id="task-form-title">Add New Task</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close task form">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          <form>
+        <form id="task-form" novalidate>
+          <div class="modal-body">
+            <p id="task-form-help" class="text-muted small">
+              Task data is stored locally in this browser. Required fields are marked with an asterisk.
+            </p>
+            <div id="task-form-feedback" class="alert alert-danger d-none" role="alert" aria-live="polite"></div>
             <div class="form-group">
-              <label for="modalTaskDescription">Task description</label>
-              <textarea class="form-control" id="modalTaskDescription" rows="3"></textarea>
+              <label for="modalTaskDescription">Task description <span aria-hidden="true">*</span></label>
+              <textarea class="form-control" id="modalTaskDescription" rows="3" maxlength="500" required aria-required="true"></textarea>
             </div>
             <div class="form-group">
-              <label for="modalDueDate">Due date</label>
-              <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="modalDueDate" autocomplete="off">
+              <label for="modalDueDate">Due date <span aria-hidden="true">*</span></label>
+              <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="modalDueDate" autocomplete="off" inputmode="numeric" required aria-required="true">
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-save">Save changes</button>
-        </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-save">Save Task</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

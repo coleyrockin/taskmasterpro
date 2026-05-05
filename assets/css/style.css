@@ -1,5 +1,20 @@
+:root {
+  --brand-pink: #fa8bff;
+  --brand-blue: #2bd2ff;
+  --brand-green: #2bff88;
+  --danger-red: #ea0028;
+  --danger-soft: #ff9a8b;
+  --panel-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: 'Open Sans', sans-serif;
+  min-width: 320px;
+  font-family: "Open Sans", sans-serif;
+  background: #f8f9fa;
 }
 
 h1,
@@ -8,11 +23,71 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Staatliches', sans-serif;
+  font-family: "Staatliches", sans-serif;
+  letter-spacing: 0.03em;
 }
 
-ul.list-group {
+.app-shell {
+  background: linear-gradient(135deg, #f8f9fa 0%, #eef8fb 100%);
+}
+
+.app-sidebar {
+  z-index: 2;
+}
+
+.app-tagline {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1051;
+  padding: 0.5rem 0.75rem;
+  color: #fff;
+  background: #212529;
+  border-radius: 0.25rem;
+}
+
+.card {
+  border: 0;
+  border-radius: 0.75rem;
+  box-shadow: var(--panel-shadow);
+  overflow: hidden;
+}
+
+.card-header {
+  border-bottom: 0;
+}
+
+ul.list-group,
+.task-list {
   min-height: 130px;
+}
+
+.task-card {
+  cursor: grab;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.task-card:focus,
+.task-card:focus-within {
+  outline: 3px solid rgba(43, 210, 255, 0.65);
+  outline-offset: -3px;
+}
+
+.task-card:hover {
+  box-shadow: inset 0.25rem 0 0 var(--brand-blue);
+}
+
+.task-description {
+  cursor: text;
+  overflow-wrap: anywhere;
+}
+
+.task-date {
+  cursor: pointer;
 }
 
 .bottom-trash {
@@ -21,7 +96,7 @@ ul.list-group {
   font-size: 2.3rem;
   font-family: "Staatliches", sans-serif;
   transform: translateY(150px);
-  transition: all .5s ease-in-out; 
+  transition: all 0.5s ease-in-out;
   background-color: rgba(234, 0, 39, 0.7);
 }
 
@@ -35,34 +110,56 @@ ul.list-group {
 }
 
 .dropover {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.12);
 }
 
 .dropover-active {
-  background: rgba(0,0,0,0.9);
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .btn-add,
 .btn-save {
-  background-color: #FA8BFF;
-  background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%);
-  transition: all .5s ease-out;  
-  background-size: 1px 100px; 
-  background-position: 0px -10px;
+  background-color: var(--brand-pink);
+  background-image: linear-gradient(45deg, var(--brand-pink) 0%, var(--brand-blue) 52%, var(--brand-green) 90%);
+  transition: all 0.5s ease-out;
+  background-size: 1px 100px;
+  background-position: 0 -10px;
+  border: 0;
+  color: #111;
+  font-weight: 700;
 }
 
-.btn-close, 
+.btn-close,
 .btn-delete {
-  transition: all .5s ease-out;  
-  background-size:1px 100px; 
+  transition: all 0.5s ease-out;
+  background-size: 1px 100px;
   background-position: 1px -10px;
-  background-color: #ea0028;
-  background-image: linear-gradient(180deg, #FF9A8B 0%, #ea0028 100%);
+  background-color: var(--danger-red);
+  background-image: linear-gradient(180deg, var(--danger-soft) 0%, var(--danger-red) 100%);
+  border: 0;
+  color: #fff;
+  font-weight: 700;
 }
 
-.btn-save:hover, 
+.btn-save:hover,
 .btn-add:hover,
-.btn-close:hover, 
-.btn-delete:hover {
+.btn-close:hover,
+.btn-delete:hover,
+.btn-save:focus,
+.btn-add:focus,
+.btn-close:focus,
+.btn-delete:focus {
   background-position: 1px -50px;
+  box-shadow: 0 0 0 0.2rem rgba(43, 210, 255, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
